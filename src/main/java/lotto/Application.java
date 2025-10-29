@@ -38,7 +38,12 @@ public class Application {
         for(int i=0;i<6;i++){
             winningNumber.add(Integer.parseInt(winningNumbersInput[i]));
         }
-        
+
+        System.out.println();
+        System.out.println("보너스 번호를 입력해 주세요.");
+        String bonusInput = readLine();
+        int bonus = Integer.parseInt(bonusInput);
+
 
     }
 }
