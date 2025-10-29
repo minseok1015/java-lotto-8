@@ -2,7 +2,10 @@ package lotto;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
@@ -26,6 +29,16 @@ public class Application {
         for (int i = 0; i < lottoCount; i++) {
             System.out.println(Lottos[i].toString());
         }
+
+        System.out.println();
+        System.out.println("당첨 번호를 입력해 주세요.");
+        String winningNumberInput = readLine();
+        String[] winningNumbersInput = winningNumberInput.split(",");
+        Set<Integer> winningNumber = new HashSet<>();
+        for(int i=0;i<6;i++){
+            winningNumber.add(Integer.parseInt(winningNumbersInput[i]));
+        }
+        
 
     }
 }
