@@ -21,5 +21,11 @@ public class Application {
             List<Integer> numbers = Randoms.pickUniqueNumbersInRange(1, 45, 6);
             Lottos[i] = new Lotto(numbers);
         }
+
+        System.out.println(lottoCount+"개를 구매했습니다.");
+        for (int i = 0; i < lottoCount; i++) {
+            System.out.println(Lottos[i].toString());
+        }
+
     }
 }
