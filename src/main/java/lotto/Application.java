@@ -18,16 +18,16 @@ public class Application {
 
         int lottoCount = buyAmount/1000;
 
-        Lotto[] Lottos = new Lotto[lottoCount];
+        Lotto[] lottos = new Lotto[lottoCount];
 
         for(int i=0;i<lottoCount;i++){
             List<Integer> numbers = Randoms.pickUniqueNumbersInRange(1, 45, 6);
-            Lottos[i] = new Lotto(numbers);
+            lottos[i] = new Lotto(numbers);
         }
 
         System.out.println(lottoCount+"개를 구매했습니다.");
         for (int i = 0; i < lottoCount; i++) {
-            System.out.println(Lottos[i].toString());
+            System.out.println(lottos[i].toString());
         }
 
         System.out.println();
