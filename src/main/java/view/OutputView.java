@@ -22,7 +22,7 @@ public class OutputView {
     }
 
     public void printWinningCounts(HashMap<Integer, Integer> winningCountMap) {
-        System.out.println("3개 일치 (5, 000원) - " + winningCountMap.getOrDefault(5, 0) + "개");
+        System.out.println("3개 일치 (5,000원) - " + winningCountMap.getOrDefault(5, 0) + "개");
         System.out.println("4개 일치 (50,000원) - " + winningCountMap.getOrDefault(4, 0) + "개");
         System.out.println("5개 일치 (1,500,000원) - " + winningCountMap.getOrDefault(3, 0) + "개");
         System.out.println("5개 일치, 보너스 볼 일치 (30,000,000원) - " + winningCountMap.getOrDefault(2, 0) + "개");
@@ -30,6 +30,6 @@ public class OutputView {
     }
 
     public void printProfitRate(double profitRate) {
-        System.out.println("총 수익률은 " + profitRate + "% 입니다");
+        System.out.println("총 수익률은 " + profitRate + "%입니다.");
     }
 }
