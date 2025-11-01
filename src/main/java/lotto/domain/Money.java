@@ -10,7 +10,7 @@ public class Money {
         this.amount = amount;
     }
 
-    public static Money of(String input) {
+    public static Money from(String input) {
         int amount = parseToInt(input);
         return new Money(amount);
     }
