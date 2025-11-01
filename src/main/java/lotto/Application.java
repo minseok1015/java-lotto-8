@@ -1,8 +1,8 @@
 package lotto;
 
 import camp.nextstep.edu.missionutils.Randoms;
-import view.InputView;
-import view.OutputView;
+import lotto.view.InputView;
+import lotto.view.OutputView;
 
 
 import java.util.HashMap;
