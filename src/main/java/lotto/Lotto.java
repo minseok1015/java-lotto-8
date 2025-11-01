@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
@@ -21,8 +23,9 @@ public class Lotto {
 
     @Override
     public String toString() {
-        numbers.sort(Integer::compareTo);
-        return numbers.toString();
+        List<Integer> copy = new ArrayList<>(numbers);
+        Collections.sort(copy);
+        return copy.toString();
     }
 
     public int calculateRank(HashSet<Integer> winningNumber,int bonus){
