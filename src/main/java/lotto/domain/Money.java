@@ -18,10 +18,13 @@ public class Money {
         if (amount <= 0) {
             throw new IllegalArgumentException("[ERROR] 금액은 0보다 커야 합니다.");
         }
+        if (amount % LOTTO_PRICE != 0) {
+            throw new IllegalArgumentException("[ERROR] 금액은 1000원 단위여야 합니다.");
+        }
     }
 
     public int calculateLottoCount() {
         return amount / LOTTO_PRICE;
     }
-
+    
 }
