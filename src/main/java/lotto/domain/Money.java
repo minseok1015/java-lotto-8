@@ -12,5 +12,11 @@ public class Money {
     public static Money of(int amount) {
         return new Money(amount);
     }
-    
+
+
+
+    public int calculateLottoCount() {
+        return amount / LOTTO_PRICE;
+    }
+
 }

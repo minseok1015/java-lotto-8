@@ -18,8 +18,7 @@ public class Application {
         OutputView outputView = new OutputView();
 
         Money buyAmount = Money.of(inputView.readPurchaseAmount());
-
-        int lottoCount = buyAmount/1000;
+        int lottoCount = buyAmount.calculateLottoCount();
 
         Lotto[] lottos = new Lotto[lottoCount];
 
