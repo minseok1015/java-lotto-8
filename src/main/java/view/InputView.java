@@ -1,8 +1,7 @@
 package view;
 
-import camp.nextstep.edu.missionutils.Console;
-
 import java.util.HashSet;
+import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
 
