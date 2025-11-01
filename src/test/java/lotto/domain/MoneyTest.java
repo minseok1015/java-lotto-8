@@ -17,6 +17,13 @@ class MoneyTest {
         assertThat(money.calculateLottoCount()).isEqualTo(8);
     }
 
+    @DisplayName("3.1.3 숫자가 아닌 입력이면 예외가 발생한다")
+    @Test
+    void from_non_numeric_throws() {
+        assertThatThrownBy(() -> Money.from("abc"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
     @DisplayName("3.1.2 금액이 0 이하이면 예외가 발생한다")
     @Test
     void from_non_positive_throws() {
