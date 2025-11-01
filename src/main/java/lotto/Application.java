@@ -1,6 +1,7 @@
 package lotto;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import lotto.domain.Money;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -16,7 +17,7 @@ public class Application {
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
 
-        int buyAmount = inputView.readPurchaseAmount();
+        Money buyAmount = Money.of(inputView.readPurchaseAmount());
 
         int lottoCount = buyAmount/1000;
 
