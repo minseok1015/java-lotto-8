@@ -2,6 +2,7 @@ package lotto;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import lotto.domain.Money;
+import lotto.service.LottoGenerator;
 import lotto.util.Retry;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -21,12 +22,8 @@ public class Application {
         Money buyAmount = Retry.readMoney(inputView);
         int lottoCount = buyAmount.calculateLottoCount();
 
-        Lotto[] lottos = new Lotto[lottoCount];
-
-        for(int i=0;i<lottoCount;i++){
-            List<Integer> numbers = Randoms.pickUniqueNumbersInRange(1, 45, 6);
-            lottos[i] = new Lotto(numbers);
-        }
+        LottoGenerator generator = new LottoGenerator();
+        Lotto[] lottos = generator.generateLottos(lottoCount);
 
         outputView.printPurchaseCount(lottoCount);
         outputView.printLottos(lottos);
