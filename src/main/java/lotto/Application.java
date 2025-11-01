@@ -41,7 +41,7 @@ public class Application {
             winningCountMap.put(rank,winningCountMap.getOrDefault(rank,0)+1);
         }
 
-        double profitRate = calculateProfitRate(winningCountMap,buyAmount);
+        double profitRate = calculateProfitRate(winningCountMap,buyAmount.value());
 
         outputView.printStatisticsHeader();
         outputView.printWinningCounts(winningCountMap);

@@ -26,5 +26,7 @@ public class Money {
     public int calculateLottoCount() {
         return amount / LOTTO_PRICE;
     }
-    
+    public int value() {
+        return amount;
+    }
 }
