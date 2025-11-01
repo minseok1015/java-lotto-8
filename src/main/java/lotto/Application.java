@@ -2,6 +2,7 @@ package lotto;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import lotto.domain.Money;
+import lotto.util.Retry;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -16,9 +17,8 @@ public class Application {
 
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
-
-        String input = inputView.readPurchaseAmount();
-        Money buyAmount = Money.from(input);
+        
+        Money buyAmount = Retry.readMoney(inputView);
         int lottoCount = buyAmount.calculateLottoCount();
 
         Lotto[] lottos = new Lotto[lottoCount];
