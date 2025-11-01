@@ -17,6 +17,15 @@ class MoneyTest {
         assertThat(money.calculateLottoCount()).isEqualTo(8);
     }
 
+    @DisplayName("3.1.2 금액이 0 이하이면 예외가 발생한다")
+    @Test
+    void from_non_positive_throws() {
+        assertThatThrownBy(() -> Money.from("0"))
+                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> Money.from("-1000"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
     @DisplayName("3.1.1 금액이 1000원 단위가 아니면 예외가 발생한다")
     @Test
     void from_not_multiple_of_1000_throws() {
