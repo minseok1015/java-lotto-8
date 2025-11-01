@@ -1,20 +1,19 @@
 package lotto;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import view.InputView;
 
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
-import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class Application {
     public static void main(String[] args) {
-        System.out.println("구입금액을 입력해 주세요.");
 
-        String buyAmountInput = readLine();
-        int buyAmount = Integer.parseInt(buyAmountInput);
+        InputView inputView = new InputView();
+        int buyAmount = inputView.readPurchaseAmount();
 
         int lottoCount = buyAmount/1000;
 
@@ -30,19 +29,8 @@ public class Application {
             System.out.println(lottos[i].toString());
         }
 
-        System.out.println();
-        System.out.println("당첨 번호를 입력해 주세요.");
-        String winningNumberInput = readLine();
-        String[] winningNumbersInput = winningNumberInput.split(",");
-        HashSet<Integer> winningNumber = new HashSet<>();
-        for(int i=0;i<6;i++){
-            winningNumber.add(Integer.parseInt(winningNumbersInput[i]));
-        }
-
-        System.out.println();
-        System.out.println("보너스 번호를 입력해 주세요.");
-        String bonusInput = readLine();
-        int bonus = Integer.parseInt(bonusInput);
+        HashSet<Integer> winningNumber = inputView.readWinningNumbers();
+        int bonus = inputView.readBonusNumber();
 
         HashMap<Integer,Integer> winningCountMap = new HashMap<>();
 
