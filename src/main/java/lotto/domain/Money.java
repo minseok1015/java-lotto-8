@@ -10,7 +10,8 @@ public class Money {
         this.amount = amount;
     }
 
-    public static Money of(int amount) {
+    public static Money of(String input) {
+        int amount = parseToInt(input);
         return new Money(amount);
     }
 
@@ -20,6 +21,14 @@ public class Money {
         }
         if (amount % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException("[ERROR] 금액은 1000원 단위여야 합니다.");
+        }
+    }
+
+    private static int parseToInt(String input) {
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("[ERROR] 금액은 숫자여야 합니다.");
         }
     }
 
