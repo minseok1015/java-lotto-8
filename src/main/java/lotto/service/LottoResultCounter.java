@@ -16,4 +16,17 @@ public class LottoResultCounter {
         counts.put(rank, counts.get(rank) + 1);
     }
 
+    public int totalPrize() {
+        int sum = 0;
+        for (Rank r : Rank.values()) {
+            sum += counts.get(r) * r.prize();
+        }
+        return sum;
+    }
+
+    public double profitRate(int buyAmount) {
+        double rate = (double) totalPrize() / buyAmount * 100.0;
+        return Math.round(rate * 100) / 100.0;
+    }
+
 }

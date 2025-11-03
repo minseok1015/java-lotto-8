@@ -40,7 +40,7 @@ public class Application {
             counter.add(rank);
         }
 
-        double profitRate = calculateProfitRate(winningCountMap,buyAmount.value());
+        double profitRate = counter.profitRate(buyAmount.value());
 
         outputView.printStatisticsHeader();
         outputView.printWinningCounts(winningCountMap);
@@ -48,11 +48,4 @@ public class Application {
 
     }
 
-    private static double calculateProfitRate(HashMap<Rank, Integer> winningCountMap, int buyAmount){
-        int totalPrize=0;
-        for (Rank r : Rank.displayOrder()) {
-            totalPrize += winningCountMap.getOrDefault(r, 0) * r.prize();
-        }
-        return Math.round((double) totalPrize / buyAmount * 100 * 100) / 100.0;
-    }
 }
