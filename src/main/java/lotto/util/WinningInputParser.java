@@ -6,11 +6,11 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public final class WinningInputParser {
-    private WinningInputParser() {}
-
     private static final int REQUIRED_COUNT = 6;
     private static final int MIN = 1;
     private static final int MAX = 45;
+
+    private WinningInputParser() {}
 
     public static Set<Integer> parseWinningNumbers(String line) {
         requireNonBlank(line);
