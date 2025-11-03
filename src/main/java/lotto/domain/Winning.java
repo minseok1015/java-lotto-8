@@ -18,6 +18,9 @@ public class Winning {
         if (numbers.contains(bonus)) {
             throw new IllegalArgumentException("보너스 번호는 당첨 번호와 달라야 합니다.");
         }
+        for (int n : numbers) {
+            if (n < 1 || n > 45) throw new IllegalArgumentException("번호는 1~45 범위입니다.");
+        }
         return new Winning(numbers, bonus);
     }
     
