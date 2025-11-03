@@ -3,6 +3,7 @@ package lotto.service;
 import camp.nextstep.edu.missionutils.Randoms;
 import lotto.Lotto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGenerator {
@@ -12,10 +13,10 @@ public class LottoGenerator {
         return new Lotto(numbers);
     }
 
-    public Lotto[] generateLottos(int count) {
-        Lotto[] lottos = new Lotto[count];
+    public List<Lotto> generateLottos(int count) {
+        List<Lotto> lottos = new ArrayList<>(count);
         for (int i = 0; i < count; i++) {
-            lottos[i] = generate();
+            lottos.add(generate());
         }
         return lottos;
     }

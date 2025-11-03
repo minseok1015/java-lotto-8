@@ -9,6 +9,7 @@ import lotto.util.Retry;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 import java.util.HashSet;
+import java.util.List;
 
 
 public class Application {
@@ -21,7 +22,7 @@ public class Application {
         int lottoCount = buyAmount.calculateLottoCount();
 
         LottoGenerator generator = new LottoGenerator();
-        Lotto[] lottos = generator.generateLottos(lottoCount);
+        List<Lotto> lottos = generator.generateLottos(lottoCount);
 
         outputView.printPurchaseCount(lottoCount);
         outputView.printLottos(lottos);
@@ -32,8 +33,8 @@ public class Application {
 
         LottoResultCounter counter = new LottoResultCounter();
 
-        for (int i = 0; i < lottoCount; i++) {
-            Rank rank = winning.judge(lottos[i]);
+        for (Lotto lotto : lottos) {
+            Rank rank = winning.judge(lotto);
             counter.add(rank);
         }
 

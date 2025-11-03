@@ -2,6 +2,8 @@ package lotto.view;
 
 import lotto.Lotto;
 import lotto.domain.Rank;
+
+import java.util.List;
 import java.util.Map;
 
 
@@ -11,9 +13,9 @@ public class OutputView {
         System.out.println(lottoCount + "개를 구매했습니다.");
     }
 
-    public void printLottos(Lotto[] lottos) {
-        for (int i = 0; i < lottos.length; i++) {
-            System.out.println(lottos[i].toString());
+    public void printLottos(List<Lotto> lottos) {
+        for (Lotto lotto : lottos) {
+            System.out.println(lotto.toString());
         }
     }
 
