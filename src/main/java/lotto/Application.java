@@ -6,7 +6,6 @@ import lotto.domain.Winning;
 import lotto.service.LottoGenerator;
 import lotto.service.LottoResultCounter;
 import lotto.util.Retry;
-import lotto.util.WinningInputParser;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 import java.util.List;

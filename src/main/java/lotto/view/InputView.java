@@ -1,6 +1,5 @@
 package lotto.view;
 
-import java.util.HashSet;
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
