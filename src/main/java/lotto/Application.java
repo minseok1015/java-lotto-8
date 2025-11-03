@@ -1,7 +1,8 @@
 package lotto;
 
-import camp.nextstep.edu.missionutils.Randoms;
 import lotto.domain.Money;
+import lotto.domain.Rank;
+import lotto.domain.Winning;
 import lotto.service.LottoGenerator;
 import lotto.util.Retry;
 import lotto.view.InputView;
@@ -10,7 +11,6 @@ import lotto.view.OutputView;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 
 
 public class Application {
@@ -30,13 +30,13 @@ public class Application {
 
         HashSet<Integer> winningNumber = inputView.readWinningNumbers();
         int bonus = inputView.readBonusNumber();
+        Winning winning = Winning.of(winningNumber, bonus);
 
-        HashMap<Integer,Integer> winningCountMap = new HashMap<>();
+        HashMap<Rank, Integer> winningCountMap = new HashMap<>();
 
-
-        for(int i=0;i<lottoCount;i++){
-            int rank = lottos[i].calculateRank(winningNumber,bonus);
-            winningCountMap.put(rank,winningCountMap.getOrDefault(rank,0)+1);
+        for (int i = 0; i < lottoCount; i++) {
+            Rank rank = winning.judge(lottos[i]);
+            winningCountMap.put(rank, winningCountMap.getOrDefault(rank, 0) + 1);
         }
 
         double profitRate = calculateProfitRate(winningCountMap,buyAmount.value());
@@ -47,14 +47,11 @@ public class Application {
 
     }
 
-    private static double calculateProfitRate(HashMap<Integer, Integer> winningCountMap, int buyAmount){
+    private static double calculateProfitRate(HashMap<Rank, Integer> winningCountMap, int buyAmount){
         int totalPrize=0;
-        totalPrize += winningCountMap.getOrDefault(5,0) * 5000;
-        totalPrize += winningCountMap.getOrDefault(4,0) * 50000;
-        totalPrize += winningCountMap.getOrDefault(3,0) * 1500000;
-        totalPrize += winningCountMap.getOrDefault(2,0) * 30000000;
-        totalPrize += winningCountMap.getOrDefault(1,0) * 2000000000;
-
+        for (Rank r : Rank.displayOrder()) {
+            totalPrize += winningCountMap.getOrDefault(r, 0) * r.prize();
+        }
         return Math.round((double) totalPrize / buyAmount * 100 * 100) / 100.0;
     }
 }

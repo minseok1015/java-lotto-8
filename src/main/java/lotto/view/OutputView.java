@@ -1,7 +1,10 @@
 package lotto.view;
 
 import lotto.Lotto;
-import java.util.HashMap;
+import lotto.domain.Rank;
+
+import java.util.Map;
+
 
 public class OutputView {
 
@@ -21,12 +24,10 @@ public class OutputView {
         System.out.println("---");
     }
 
-    public void printWinningCounts(HashMap<Integer, Integer> winningCountMap) {
-        System.out.println("3개 일치 (5,000원) - " + winningCountMap.getOrDefault(5, 0) + "개");
-        System.out.println("4개 일치 (50,000원) - " + winningCountMap.getOrDefault(4, 0) + "개");
-        System.out.println("5개 일치 (1,500,000원) - " + winningCountMap.getOrDefault(3, 0) + "개");
-        System.out.println("5개 일치, 보너스 볼 일치 (30,000,000원) - " + winningCountMap.getOrDefault(2, 0) + "개");
-        System.out.println("6개 일치 (2,000,000,000원) - " + winningCountMap.getOrDefault(1, 0) + "개");
+    public void printWinningCounts(Map<Rank, Integer> counts) {
+        for (Rank r : Rank.displayOrder()) {
+            System.out.println(r.label() + " - " + counts.getOrDefault(r, 0) + "개");
+        }
     }
 
     public void printProfitRate(double profitRate) {
