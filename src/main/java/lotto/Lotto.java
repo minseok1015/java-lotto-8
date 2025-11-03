@@ -23,6 +23,12 @@ public class Lotto {
         if (unique != 6) {
             throw new IllegalArgumentException("[ERROR] 중복 번호가 있습니다.");
         }
+        for (int number : numbers) {
+            if (number < 1 || number > 45) {
+                throw new IllegalArgumentException("[ERROR] 번호는 1~45 범위여야 합니다.");
+            }
+        }
+    }
 
 
     @Override
