@@ -4,6 +4,7 @@ import lotto.domain.Money;
 import lotto.domain.Rank;
 import lotto.domain.Winning;
 import lotto.service.LottoGenerator;
+import lotto.service.LottoResultCounter;
 import lotto.util.Retry;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -32,11 +33,11 @@ public class Application {
         int bonus = inputView.readBonusNumber();
         Winning winning = Winning.of(winningNumber, bonus);
 
-        HashMap<Rank, Integer> winningCountMap = new HashMap<>();
+        LottoResultCounter counter = new LottoResultCounter();
 
         for (int i = 0; i < lottoCount; i++) {
             Rank rank = winning.judge(lottos[i]);
-            winningCountMap.put(rank, winningCountMap.getOrDefault(rank, 0) + 1);
+            counter.add(rank);
         }
 
         double profitRate = calculateProfitRate(winningCountMap,buyAmount.value());
