@@ -91,6 +91,122 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 구매금액_0원_재입력후_정상동작() {
+        assertRandomUniqueNumbersInRangeTest(
+                () -> {
+                    run("0", "1000", "1,2,3,4,5,6", "7");
+                    String out = output();
+                    assertThat(out).contains(ERROR_MESSAGE);
+                    assertThat(out).contains("1개를 구매했습니다.");
+                    assertThat(out).contains("당첨 통계");
+                },
+                List.of(8, 21, 23, 41, 42, 43)
+        );
+    }
+
+    @Test
+    void 구매금액_1000원단위아님_재입력후_정상동작() {
+        assertRandomUniqueNumbersInRangeTest(
+                () -> {
+                    run("3500", "2000", "1,2,3,4,5,6", "7");
+                    String out = output();
+                    assertThat(out).contains(ERROR_MESSAGE);
+                    assertThat(out).contains("2개를 구매했습니다.");
+                    assertThat(out).contains("당첨 통계");
+                },
+                List.of(1, 2, 3, 10, 11, 12),
+                List.of(7, 20, 21, 22, 23, 24)
+        );
+    }
+
+    @Test
+    void 당첨번호_범위초과_재입력후_정상동작() {
+        assertRandomUniqueNumbersInRangeTest(
+                () -> {
+                    run("1000", "0,2,3,4,5,6", "1,2,3,4,5,6", "7");
+                    String out = output();
+                    assertThat(out).contains(ERROR_MESSAGE);
+                    assertThat(out).contains("1개를 구매했습니다.");
+                    assertThat(out).contains("당첨 통계");
+                },
+                List.of(8, 21, 23, 41, 42, 43)
+        );
+    }
+
+    @Test
+    void 당첨번호_중복값_재입력후_정상동작() {
+        assertRandomUniqueNumbersInRangeTest(
+                () -> {
+                    run("1000", "1,1,2,3,4,5", "1,2,3,4,5,6", "7");
+                    String out = output();
+                    assertThat(out).contains(ERROR_MESSAGE);
+                    assertThat(out).contains("1개를 구매했습니다.");
+                    assertThat(out).contains("당첨 통계");
+                },
+                List.of(2, 7, 14, 21, 28, 35)
+        );
+    }
+
+    @Test
+    void 보너스번호_형식오류_재입력후_정상동작() {
+        assertRandomUniqueNumbersInRangeTest(
+                () -> {
+                    run("1000", "1,2,3,4,5,6", "a", "7");
+                    String out = output();
+                    assertThat(out).contains(ERROR_MESSAGE);
+                    assertThat(out).contains("당첨 통계");
+                },
+                List.of(1, 3, 5, 14, 22, 45)
+        );
+    }
+
+    @Test
+    void 보너스번호_범위초과_재입력후_정상동작() {
+        assertRandomUniqueNumbersInRangeTest(
+                () -> {
+                    run("1000", "1,2,3,4,5,6", "50", "7");
+                    String out = output();
+                    assertThat(out).contains(ERROR_MESSAGE);
+                    assertThat(out).contains("당첨 통계");
+                },
+                List.of(4, 8, 15, 16, 23, 42)
+        );
+    }
+
+    @Test
+    void 수익률_모두_꽝_케이스() {
+        assertRandomUniqueNumbersInRangeTest(
+                () -> {
+                    run("2000", "1,2,3,4,5,6", "7");
+                    String out = output();
+                    assertThat(out).contains("2개를 구매했습니다.");
+                    assertThat(out).contains("당첨 통계");
+                    assertThat(out).contains("총 수익률은");
+                    assertThat(out).contains("%입니다.");
+                },
+                // 당첨번호(1~6)와 전혀 겹치지 않는 티켓들
+                List.of(8, 9, 10, 11, 12, 13),
+                List.of(14, 15, 16, 17, 18, 19)
+        );
+    }
+
+    @Test
+    void 수익률_1등_1개_케이스() {
+        assertRandomUniqueNumbersInRangeTest(
+                () -> {
+                    // 첫 번째 티켓이 당첨번호와 완전히 동일 → 1등 1개
+                    run("1000", "1,2,3,4,5,6", "7");
+                    String out = output();
+                    assertThat(out).contains("1개를 구매했습니다.");
+                    assertThat(out).contains("6개 일치 (2,000,000,000원) - 1개");
+                    assertThat(out).contains("총 수익률은");
+                    assertThat(out).contains("%입니다.");
+                },
+                List.of(1, 2, 3, 4, 5, 6)
+        );
+    }
+
+    @Test
     void 예외_테스트() {
         assertSimpleTest(() -> {
             runException("1000j");
