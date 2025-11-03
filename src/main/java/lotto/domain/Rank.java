@@ -31,4 +31,8 @@ public enum Rank {
         if (matchCount == 3) return FIFTH;
         return MISS;
     }
+
+    public static Rank[] displayOrder() {
+        return new Rank[]{FIFTH, FOURTH, THIRD, SECOND, FIRST};
+    }
 }
