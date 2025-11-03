@@ -18,8 +18,8 @@ public class Application {
 
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
-        
-        Money buyAmount = Retry.readMoney(inputView);
+
+        Money buyAmount = Retry.readParsed(inputView::readPurchaseAmount, Money::from);
         int lottoCount = buyAmount.calculateLottoCount();
 
         LottoGenerator generator = new LottoGenerator();
@@ -28,11 +28,15 @@ public class Application {
         outputView.printPurchaseCount(lottoCount);
         outputView.printLottos(lottos);
 
-        String winningInput = inputView.readWinningNumbersLine();
-        Set<Integer> winningNumbers = WinningInputParser.parseWinningNumbers(winningInput);
+        Set<Integer> winningNumbers = Retry.readParsed(
+                inputView::readWinningNumbersLine,
+                lotto.util.WinningInputParser::parseWinningNumbers
+        );
 
-        String bonusInput = inputView.readBonusNumberLine();
-        int bonus = WinningInputParser.validateBonus(bonusInput);
+        int bonus = Retry.readParsed(
+                inputView::readBonusNumberLine,
+                lotto.util.WinningInputParser::validateBonus
+        );
 
         Winning winning = Winning.of(winningNumbers, bonus);
 
