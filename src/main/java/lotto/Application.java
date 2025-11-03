@@ -6,10 +6,11 @@ import lotto.domain.Winning;
 import lotto.service.LottoGenerator;
 import lotto.service.LottoResultCounter;
 import lotto.util.Retry;
+import lotto.util.WinningInputParser;
 import lotto.view.InputView;
 import lotto.view.OutputView;
-import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 public class Application {
@@ -27,9 +28,10 @@ public class Application {
         outputView.printPurchaseCount(lottoCount);
         outputView.printLottos(lottos);
 
-        HashSet<Integer> winningNumber = inputView.readWinningNumbers();
+        String winningInput = inputView.readWinningNumbersLine();
+        Set<Integer> winningNumbers = WinningInputParser.parseWinningNumbers(winningInput);
         int bonus = inputView.readBonusNumber();
-        Winning winning = Winning.of(winningNumber, bonus);
+        Winning winning = Winning.of(winningNumbers, bonus);
 
         LottoResultCounter counter = new LottoResultCounter();
 
