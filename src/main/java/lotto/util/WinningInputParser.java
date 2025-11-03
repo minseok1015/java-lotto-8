@@ -7,11 +7,15 @@ public final class WinningInputParser {
     private WinningInputParser() {}
 
     private static final int REQUIRED_COUNT = 6;
+    private static final int MIN = 1;
+    private static final int MAX = 45;
+
 
     public static Set<Integer> parseWinningNumbers(String line) {
         requireNonBlank(line);
         List<Integer> numbers = splitToNumber(line);
         validateCount(numbers);
+        validateRange(numbers);
         return new HashSet<>(numbers);
     }
 
@@ -40,6 +44,18 @@ public final class WinningInputParser {
     private static void validateCount(List<Integer> numbers) {
         if (numbers.size() != REQUIRED_COUNT) {
             throw new IllegalArgumentException("[ERROR] 당첨 번호는 " + REQUIRED_COUNT + "개여야 합니다.");
+        }
+    }
+
+    private static void validateRange(List<Integer> numbers) {
+        for (int number : numbers) {
+            validateInRange(number);
+        }
+    }
+
+    private static void validateInRange(int number) {
+        if (number < MIN || number > MAX) {
+            throw new IllegalArgumentException("[ERROR] 번호는 " + MIN + "~" + MAX + " 범위여야 합니다.");
         }
     }
 
