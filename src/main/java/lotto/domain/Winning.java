@@ -21,10 +21,13 @@ public class Winning {
             throw ErrorCode.BONUS_DUP.asException();
         }
         for (int n : numbers) {
-            if (n < 1 || n > 45) throw ErrorCode.NUMBER_RANGE.asException();
+            if (n < 1 || n > 45){
+                throw ErrorCode.NUMBER_RANGE.asException();
+            }
         }
-        if (bonus < 1 || bonus > 45) throw ErrorCode.BONUS_RANGE.asException();
-
+        if (bonus < 1 || bonus > 45){
+            throw ErrorCode.BONUS_RANGE.asException();
+        }
         return new Winning(numbers, bonus);
     }
 
@@ -32,8 +35,12 @@ public class Winning {
         int match = 0;
         boolean bonusMatched = false;
         for (int n : lotto.getNumbers()) {
-            if (numbers.contains(n)) match++;
-            if (n == bonus) bonusMatched = true;
+            if (numbers.contains(n)){
+                match++;
+            }
+            if (n == bonus){
+                bonusMatched = true;
+            }
         }
         return Rank.of(match, bonusMatched);
     }
