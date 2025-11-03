@@ -1,11 +1,13 @@
 package lotto;
 
+import lotto.common.ErrorCode;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
+
 
 class LottoTest {
     @Test
@@ -21,5 +23,31 @@ class LottoTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    // TODO: 추가 기능 구현에 따른 테스트 코드 작성
+    @Test
+    @DisplayName("로또 번호가 6개보다 적으면 예외")
+    void size_must_be_6() {
+        assertThatThrownBy(() -> new Lotto(List.of(1,2,3,4,5)))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorCode.LOTTO_SIZE.message());
+    }
+
+
+    @DisplayName("로또 번호가 범위를 벗어나면 예외(1~45)")
+    @Test
+    void numbers_out_of_range_throws() {
+        assertThatThrownBy(() -> new Lotto(List.of(0, 2, 3, 4, 5, 6)))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorCode.NUMBER_RANGE.message());
+
+        assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5, 46)))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorCode.NUMBER_RANGE.message());
+    }
+
+    @DisplayName("toString은 정렬된 문자열을 출력한다")
+    @Test
+    void toString_sorted() {
+        Lotto lotto = new Lotto(List.of(45, 1, 30, 5, 10, 2));
+        assertThat(lotto.toString()).isEqualTo("[1, 2, 5, 10, 30, 45]");
+    }
 }
