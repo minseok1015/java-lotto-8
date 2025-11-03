@@ -20,8 +20,8 @@ public class Winning {
         if (numbers.contains(bonus)) {
             throw ErrorCode.BONUS_DUP.asException();
         }
-        for (int n : numbers) {
-            if (n < 1 || n > 45){
+        for (int number : numbers) {
+            if (number < 1 || number > 45){
                 throw ErrorCode.NUMBER_RANGE.asException();
             }
         }

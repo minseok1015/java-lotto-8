@@ -8,8 +8,8 @@ public class LottoResultCounter {
     private final EnumMap<Rank, Integer> counts = new EnumMap<>(Rank.class);
 
     public LottoResultCounter() {
-        for (Rank r : Rank.values()) {
-            counts.put(r, 0);
+        for (Rank rank : Rank.values()) {
+            counts.put(rank, 0);
         }
     }
 
@@ -19,8 +19,8 @@ public class LottoResultCounter {
 
     public int totalPrize() {
         int sum = 0;
-        for (Rank r : Rank.values()) {
-            sum += counts.get(r) * r.prize();
+        for (Rank rank : Rank.values()) {
+            sum += counts.get(rank) * rank.prize();
         }
         return sum;
     }
