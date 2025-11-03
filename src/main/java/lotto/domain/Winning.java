@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.Lotto;
+
 import java.util.Set;
 
 public class Winning {
@@ -24,6 +26,16 @@ public class Winning {
         if (bonus < 1 || bonus > 45) throw new IllegalArgumentException("보너스는 1~45 범위입니다.");
 
         return new Winning(numbers, bonus);
+    }
+
+    public Rank judge(Lotto lotto) {
+        int match = 0;
+        boolean bonusMatched = false;
+        for (int n : lotto.getNumbers()) {
+            if (numbers.contains(n)) match++;
+            if (n == bonus) bonusMatched = true;
+        }
+        return Rank.of(match, bonusMatched);
     }
     
 }
