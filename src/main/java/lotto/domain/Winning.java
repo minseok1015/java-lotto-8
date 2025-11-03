@@ -1,12 +1,12 @@
 package lotto.domain;
 
-import java.util.HashSet;
+import java.util.Set;
 
 public class Winning {
-    private final HashSet<Integer> numbers;
+    private final Set<Integer> numbers;
     private final int bonus;
 
-    public Winning(HashSet<Integer> numbers, int bonus) {
+    public Winning(Set<Integer> numbers, int bonus) {
         this.numbers = numbers;
         this.bonus = bonus;
     }
