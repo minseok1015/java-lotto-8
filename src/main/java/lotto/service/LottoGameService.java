@@ -4,6 +4,7 @@ import lotto.Lotto;
 import lotto.domain.Money;
 import lotto.domain.Winning;
 import lotto.util.Retry;
+import lotto.util.WinningInputParser;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -52,10 +53,8 @@ public class LottoGameService {
     }
 
     private Winning readWinning() {
-        var nums = Retry.readParsed(inputView::readWinningNumbersLine,
-                lotto.util.WinningInputParser::parseWinningNumbers);
-        int bonus = Retry.readParsed(inputView::readBonusNumberLine,
-                lotto.util.WinningInputParser::validateBonus);
+        var nums = Retry.readParsed(inputView::readWinningNumbersLine, WinningInputParser::parseWinningNumbers);
+        int bonus = Retry.readParsed(inputView::readBonusNumberLine, WinningInputParser::validateBonus);
         return Winning.of(nums, bonus);
     }
 
