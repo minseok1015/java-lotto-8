@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.Lotto;
 import lotto.common.ErrorCode;
 
 import java.util.Set;
