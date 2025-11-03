@@ -6,9 +6,12 @@ import java.util.stream.Collectors;
 public final class WinningInputParser {
     private WinningInputParser() {}
 
+    private static final int REQUIRED_COUNT = 6;
+
     public static Set<Integer> parseWinningNumbers(String line) {
         requireNonBlank(line);
         List<Integer> numbers = splitToNumber(line);
+        validateCount(numbers);
         return new HashSet<>(numbers);
     }
 
@@ -31,6 +34,12 @@ public final class WinningInputParser {
                     .collect(Collectors.toList());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("[ERROR] 숫자와 쉼표(,) 형식으로 입력해 주세요.");
+        }
+    }
+
+    private static void validateCount(List<Integer> numbers) {
+        if (numbers.size() != REQUIRED_COUNT) {
+            throw new IllegalArgumentException("[ERROR] 당첨 번호는 " + REQUIRED_COUNT + "개여야 합니다.");
         }
     }
 
