@@ -16,6 +16,7 @@ public final class WinningInputParser {
         List<Integer> numbers = splitToNumber(line);
         validateCount(numbers);
         validateRange(numbers);
+        validateNoDuplicates(numbers);
         return new HashSet<>(numbers);
     }
 
@@ -58,6 +59,13 @@ public final class WinningInputParser {
     private static void validateInRange(int number) {
         if (number < MIN || number > MAX) {
             throw new IllegalArgumentException("[ERROR] 번호는 " + MIN + "~" + MAX + " 범위여야 합니다.");
+        }
+    }
+
+    private static void validateNoDuplicates(List<Integer> numbers) {
+        long unique = numbers.stream().distinct().count();
+        if (unique != numbers.size()) {
+            throw new IllegalArgumentException("[ERROR] 중복 번호가 있습니다.");
         }
     }
 
