@@ -1,15 +1,11 @@
 # java-lotto-precourse
 
-# java-racingcar-precourse
-
 ## 1. 프로젝트 개요
-### 1.1 프로젝 이름
+### 1.1 프로젝트 이름
 로또
 
 ### 1.2 프로젝트 설명
 간단한 로또 발매기를 구현한다.
-
-
 
 
 ---
@@ -66,11 +62,24 @@
 
 ## 4. 단위 테스트 (UI 제외)
 
-- 대상: 도메인/유틸 
-  - MoneyTest — 파싱/유효성/개수 계산 
-  - WinningInputParserTest — 번호/보너스 파싱 및 예외 
-  - LottoTest — 크기/중복/범위, toString 정렬 
-  - WinningTest — Winning.of 제약, judge → Rank 매핑 
-  - RankTest — Rank.of 매핑 
-  - LottoResultCounterTest — 총 상금/수익률 반올림 
-- ErrorCode 기반 메시지로 예외 메시지 단언(문자열 하드코딩 지양)
+- 대상: 도메인 및 유틸 클래스
+- 기준: 정상 흐름 + 예외 상황 검증
+- 테스트 목록:
+  - MoneyTest — 금액 파싱 및 개수 계산
+  - WinningInputParserTest — 번호/보너스 검증
+  - LottoTest — 로또 생성 규칙 및 정렬
+  - WinningTest — Winning.of 제약, judge() 동작
+  - RankTest — 등수 매핑 검증
+  - LottoResultCounterTest — 수익률 계산 반올림
+- 통합 테스트:
+  - ApplicationTest — 전체 플로우, 재입력 흐름, 수익률 출력 확인
+
+## 5. 패키지 구조
+```text
+   lotto
+   ├─ Application.java        # 실행 진입점
+   ├─ domain/                 # 핵심 도메인 (Lotto, Money, Winning, Rank 등)
+   ├─ service/                # 비즈니스 로직 조합 (LottoGenerator, LottoGameService 등)
+   ├─ util/                   # 공통 유틸 (Retry)
+   └─ view/                   # 입출력 계층 (InputView, OutputView)
+```
