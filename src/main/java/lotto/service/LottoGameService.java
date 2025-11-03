@@ -54,7 +54,7 @@ public class LottoGameService {
 
     private Winning readWinning() {
         var nums = Retry.readParsed(inputView::readWinningNumbersLine, WinningInputParser::parseWinningNumbers);
-        int bonus = Retry.readParsed(inputView::readBonusNumberLine, WinningInputParser::validateBonus);
+        int bonus = Retry.readParsed(inputView::readBonusNumberLine, line -> WinningInputParser.validateBonus(line, nums));
         return Winning.of(nums, bonus);
     }
 

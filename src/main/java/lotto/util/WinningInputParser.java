@@ -32,6 +32,20 @@ public final class WinningInputParser {
         }
     }
 
+    public static int validateBonus(String line, Set<Integer> winningNumbers) {
+        requireNonBlank(line);
+        try {
+            int bonus = Integer.parseInt(line.trim());
+            validateInRange(bonus);
+            if (winningNumbers != null && winningNumbers.contains(bonus)) {
+                throw ErrorCode.BONUS_DUP.asException();
+            }
+            return bonus;
+        } catch (NumberFormatException e) {
+            throw ErrorCode.BONUS_NOT_NUMBER.asException();
+        }
+    }
+
     private static void requireNonBlank(String line) {
         if (line == null || line.isBlank()) {
             throw ErrorCode.INPUT_BLANK.asException();
