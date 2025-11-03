@@ -21,6 +21,8 @@ public class Winning {
         for (int n : numbers) {
             if (n < 1 || n > 45) throw new IllegalArgumentException("번호는 1~45 범위입니다.");
         }
+        if (bonus < 1 || bonus > 45) throw new IllegalArgumentException("보너스는 1~45 범위입니다.");
+
         return new Winning(numbers, bonus);
     }
     
