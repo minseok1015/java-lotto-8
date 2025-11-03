@@ -2,6 +2,7 @@ package lotto.service;
 
 import lotto.domain.Rank;
 import java.util.EnumMap;
+import java.util.Map;
 
 public class LottoResultCounter {
     private final EnumMap<Rank, Integer> counts = new EnumMap<>(Rank.class);
@@ -27,6 +28,10 @@ public class LottoResultCounter {
     public double profitRate(int buyAmount) {
         double rate = (double) totalPrize() / buyAmount * 100.0;
         return Math.round(rate * 100) / 100.0;
+    }
+
+    public Map<Rank, Integer> result() {
+        return Map.copyOf(counts);
     }
 
 }

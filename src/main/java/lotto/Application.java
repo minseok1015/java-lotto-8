@@ -43,7 +43,7 @@ public class Application {
         double profitRate = counter.profitRate(buyAmount.value());
 
         outputView.printStatisticsHeader();
-        outputView.printWinningCounts(winningCountMap);
+        outputView.printWinningCounts(counter.result());
         outputView.printProfitRate(profitRate);
 
     }
