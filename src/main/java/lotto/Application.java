@@ -8,9 +8,6 @@ import lotto.service.LottoResultCounter;
 import lotto.util.Retry;
 import lotto.view.InputView;
 import lotto.view.OutputView;
-
-
-import java.util.HashMap;
 import java.util.HashSet;
 
 

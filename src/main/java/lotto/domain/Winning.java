@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.Lotto;
-
 import java.util.Set;
 
 public class Winning {
