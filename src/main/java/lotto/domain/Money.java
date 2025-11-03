@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.common.ErrorCode;
+
 public class Money {
     private static final int LOTTO_PRICE = 1000;
 
@@ -17,10 +19,10 @@ public class Money {
 
     private void validate(int amount) {
         if (amount <= 0) {
-            throw new IllegalArgumentException("[ERROR] 금액은 0보다 커야 합니다.");
+            throw ErrorCode.INVALID_AMOUNT.asException();
         }
         if (amount % LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException("[ERROR] 금액은 1000원 단위여야 합니다.");
+            throw ErrorCode.INVALID_UNIT.asException();
         }
     }
 
@@ -28,7 +30,7 @@ public class Money {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR] 금액은 숫자여야 합니다.");
+            throw ErrorCode.NOT_NUMBER.asException();
         }
     }
 

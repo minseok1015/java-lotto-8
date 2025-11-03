@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.common.ErrorCode;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -21,27 +23,27 @@ public class Lotto {
 
     private void requireNonNull(List<Integer> numbers) {
         if (numbers == null) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호가 없습니다.");
+            throw ErrorCode.LOTTO_NUMBERS_MISSING.asException();
         }
     }
 
     private void requireSize(List<Integer> numbers) {
         if (numbers.size() != 6) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호는 6개여야 합니다.");
+            throw ErrorCode.LOTTO_SIZE.asException();
         }
     }
 
     private void requireNoDup(List<Integer> numbers) {
         long unique = numbers.stream().distinct().count();
         if (unique != 6) {
-            throw new IllegalArgumentException("[ERROR] 중복 번호가 있습니다.");
+            throw ErrorCode.DUPLICATE_NUMBER.asException();
         }
     }
 
     private void requireInRange(List<Integer> numbers) {
         for (int number : numbers) {
             if (number < 1 || number > 45) {
-                throw new IllegalArgumentException("[ERROR] 번호는 1~45 범위여야 합니다.");
+                throw ErrorCode.NUMBER_RANGE.asException();
             }
         }
     }
