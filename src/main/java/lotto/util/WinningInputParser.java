@@ -12,6 +12,11 @@ public final class WinningInputParser {
         return new HashSet<>(numbers);
     }
 
+    public static int validateBonus(String line) {
+        requireNonBlank(line);
+        return Integer.parseInt(line.trim());
+    }
+
     private static void requireNonBlank(String line) {
         if (line == null || line.isBlank()) {
             throw new IllegalArgumentException("[ERROR] 입력이 비어 있습니다.");
