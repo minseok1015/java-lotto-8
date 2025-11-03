@@ -21,7 +21,9 @@ public final class WinningInputParser {
 
     public static int validateBonus(String line) {
         requireNonBlank(line);
-        return Integer.parseInt(line.trim());
+        int bonus = Integer.parseInt(line.trim());
+        validateInRange(bonus);
+        return bonus;
     }
 
     private static void requireNonBlank(String line) {
