@@ -47,6 +47,50 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 구매금액_잘못된입력_재입력후_정상동작() {
+        assertRandomUniqueNumbersInRangeTest(
+                () -> {
+                    run("1500", "2000", "1,2,3,4,5,6", "7");
+                    String out = output();
+                    assertThat(out).contains(ERROR_MESSAGE);
+                    assertThat(out).contains("2개를 구매했습니다.");
+                    assertThat(out).contains("당첨 통계", "---");
+                },
+                List.of(1, 2, 3, 10, 11, 12),
+                List.of(7, 20, 21, 22, 23, 24)
+        );
+    }
+
+    @Test
+    void 당첨번호_형식오류_재입력후_정상동작() {
+        assertRandomUniqueNumbersInRangeTest(
+                () -> {
+                    run("1000", "1,2,a,4,5,6", "1,2,3,4,5,6", "7");
+                    String out = output();
+                    assertThat(out).contains(ERROR_MESSAGE);
+                    assertThat(out).contains("1개를 구매했습니다.");
+                },
+                List.of(8, 21, 23, 41, 42, 43)
+        );
+    }
+
+    @Test
+    void 보너스번호_당첨번호와_중복시_재입력후_정상동작() {
+        assertRandomUniqueNumbersInRangeTest(
+                () -> {
+                    run("1000", "1,2,3,4,5,6", "6", "7");
+                    String out = output();
+                    assertThat(out).contains(ERROR_MESSAGE);
+                    assertThat(out).contains("당첨 통계");
+                    assertThat(out).contains("3개 일치 (5,000원)");
+                    assertThat(out).contains("총 수익률은 ");
+                    assertThat(out).contains("%입니다.");
+                },
+                List.of(3, 5, 11, 16, 32, 38)
+        );
+    }
+
+    @Test
     void 예외_테스트() {
         assertSimpleTest(() -> {
             runException("1000j");
