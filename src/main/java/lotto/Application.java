@@ -30,7 +30,10 @@ public class Application {
 
         String winningInput = inputView.readWinningNumbersLine();
         Set<Integer> winningNumbers = WinningInputParser.parseWinningNumbers(winningInput);
-        int bonus = inputView.readBonusNumber();
+
+        String bonusInput = inputView.readBonusNumberLine();
+        int bonus = WinningInputParser.validateBonus(bonusInput);
+
         Winning winning = Winning.of(winningNumbers, bonus);
 
         LottoResultCounter counter = new LottoResultCounter();
